@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="WardrobeDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Cloth">
+    <Key>
+      <PropertyRef Name="ClothingID" />
+    </Key>
+    <Property Name="ClothingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="TypeID" Type="Int32" />
+    <Property Name="ColorID" Type="Int32" />
+    <Property Name="OccassionID" Type="Int32" />
+    <Property Name="SeasonID" Type="Int32" />
+    <NavigationProperty Name="Color" Relationship="Self.FK_Clothes_Colors" FromRole="Clothes" ToRole="Colors" />
+    <NavigationProperty Name="Occassion" Relationship="Self.FK_Clothes_Occassions" FromRole="Clothes" ToRole="Occassions" />
+    <NavigationProperty Name="Season" Relationship="Self.FK_Clothes_Seasons" FromRole="Clothes" ToRole="Seasons" />
+    <NavigationProperty Name="Type" Relationship="Self.FK_Clothes_Types" FromRole="Clothes" ToRole="Types" />
+  </EntityType>
+  <EntityType Name="Color">
+    <Key>
+      <PropertyRef Name="ColorID" />
+    </Key>
+    <Property Name="ColorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ColorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Clothes" Relationship="Self.FK_Clothes_Colors" FromRole="Colors" ToRole="Clothes" />
+  </EntityType>
+  <EntityType Name="Occassion">
+    <Key>
+      <PropertyRef Name="OcassionID" />
+    </Key>
+    <Property Name="OcassionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OcassionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Clothes" Relationship="Self.FK_Clothes_Occassions" FromRole="Occassions" ToRole="Clothes" />
+  </EntityType>
+  <EntityType Name="Season">
+    <Key>
+      <PropertyRef Name="SeasonID" />
+    </Key>
+    <Property Name="SeasonID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SeasonName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Clothes" Relationship="Self.FK_Clothes_Seasons" FromRole="Seasons" ToRole="Clothes" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Type">
+    <Key>
+      <PropertyRef Name="TypeID" />
+    </Key>
+    <Property Name="TypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Clothes" Relationship="Self.FK_Clothes_Types" FromRole="Types" ToRole="Clothes" />
+  </EntityType>
+  <Association Name="FK_Clothes_Colors">
+    <End Role="Colors" Type="Self.Color" Multiplicity="0..1" />
+    <End Role="Clothes" Type="Self.Cloth" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Colors">
+        <PropertyRef Name="ColorID" />
+      </Principal>
+      <Dependent Role="Clothes">
+        <PropertyRef Name="ColorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Clothes_Occassions">
+    <End Role="Occassions" Type="Self.Occassion" Multiplicity="0..1" />
+    <End Role="Clothes" Type="Self.Cloth" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Occassions">
+        <PropertyRef Name="OcassionID" />
+      </Principal>
+      <Dependent Role="Clothes">
+        <PropertyRef Name="OccassionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Clothes_Seasons">
+    <End Role="Seasons" Type="Self.Season" Multiplicity="0..1" />
+    <End Role="Clothes" Type="Self.Cloth" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Seasons">
+        <PropertyRef Name="SeasonID" />
+      </Principal>
+      <Dependent Role="Clothes">
+        <PropertyRef Name="SeasonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Clothes_Types">
+    <End Role="Types" Type="Self.Type" Multiplicity="0..1" />
+    <End Role="Clothes" Type="Self.Cloth" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Types">
+        <PropertyRef Name="TypeID" />
+      </Principal>
+      <Dependent Role="Clothes">
+        <PropertyRef Name="TypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="WardrobeDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Clothes" EntityType="Self.Cloth" />
+    <EntitySet Name="Colors" EntityType="Self.Color" />
+    <EntitySet Name="Occassions" EntityType="Self.Occassion" />
+    <EntitySet Name="Seasons" EntityType="Self.Season" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Types" EntityType="Self.Type" />
+    <AssociationSet Name="FK_Clothes_Colors" Association="Self.FK_Clothes_Colors">
+      <End Role="Colors" EntitySet="Colors" />
+      <End Role="Clothes" EntitySet="Clothes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Clothes_Occassions" Association="Self.FK_Clothes_Occassions">
+      <End Role="Occassions" EntitySet="Occassions" />
+      <End Role="Clothes" EntitySet="Clothes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Clothes_Seasons" Association="Self.FK_Clothes_Seasons">
+      <End Role="Seasons" EntitySet="Seasons" />
+      <End Role="Clothes" EntitySet="Clothes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Clothes_Types" Association="Self.FK_Clothes_Types">
+      <End Role="Types" EntitySet="Types" />
+      <End Role="Clothes" EntitySet="Clothes" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
