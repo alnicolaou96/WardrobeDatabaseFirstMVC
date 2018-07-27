@@ -9,25 +9,22 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ColorName)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
+<div>
+    @Html.DisplayNameFor(model => model.ColorName)
+</div>
+<div>
+    @foreach (var item in Model)
+    {
+        <div>
             @Html.DisplayFor(modelItem => item.ColorName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ColorID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ColorID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ColorID })
-        </td>
-    </tr>
-}
+        </div>
+        <div>
+            @Html.ActionLink("Edit", "Edit", new { id = item.ColorID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ColorID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ColorID })
 
-</table>
+        </div>
+    }
+</div> 
+
+ 
