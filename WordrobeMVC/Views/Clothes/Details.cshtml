@@ -1,66 +1,37 @@
 ﻿@model WordrobeMVC.Cloth
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Clothes Details";
 }
 
 <h2>Details</h2>
 
-<div>
-    <h4>Cloth</h4>
+<div class="details">
+    <h4 class="hometitle" style="font-family: 'Hanalei Fill', cursive!important;">Clothing Details</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+    @Html.DisplayNameFor(model => model.Name) :
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+    @Html.DisplayFor(model => model.Name)
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Photo)
-        </dt>
+    <br />
+    @Html.DisplayNameFor(model => model.Color.ColorName) :
 
-        <dd>
-            @Html.DisplayFor(model => model.Photo)
-        </dd>
+    @Html.DisplayFor(model => model.Color.ColorName)
+    <br />
+    @Html.DisplayNameFor(model => model.Occassion.OcassionName) :
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Color.ColorName)
-        </dt>
+    @Html.DisplayFor(model => model.Occassion.OcassionName)
+    <br />
+    @Html.DisplayNameFor(model => model.Season.SeasonName) :
 
-        <dd>
-            @Html.DisplayFor(model => model.Color.ColorName)
-        </dd>
+    @Html.DisplayFor(model => model.Season.SeasonName)
+    <br />
+    @Html.DisplayNameFor(model => model.Type.Category) :
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Occassion.OcassionName)
-        </dt>
+    @Html.DisplayFor(model => model.Type.Category)
 
-        <dd>
-            @Html.DisplayFor(model => model.Occassion.OcassionName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Season.SeasonName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Season.SeasonName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Type.Category)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Type.Category)
-        </dd>
-
-    </dl>
+    <p class="backtolist">
+        @*@Html.ActionLink("Edit", "Edit", new { id = Model.ClothingID }) |*@
+        @Html.ActionLink("Back to List", "Index")
+    </p>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ClothingID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
