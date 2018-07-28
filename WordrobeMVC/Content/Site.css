@@ -205,6 +205,15 @@ text-decoration:none;
     .backtolist a{
         text-decoration:none;
     }
+/*-----------------------Registration Page---------------------*/
+.registerpage{
+    width:100%;
+    height:750px;
+    text-align:center;
+    color:rgb(116, 255, 195);
+    text-shadow:0 0 25px rgb(0, 255, 127)  ;
+    font-size:40px;
+}
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
